@@ -148,7 +148,7 @@ def __isReverseDiagonalComplete(board: List[List[int]], pawn:str) -> bool:
     for _ in range(3):
         if board[row][col] != pawn:
             return False
-        # # start from top-right
+        # move to bottom-left
         row += 1
         col -= 1
     return True

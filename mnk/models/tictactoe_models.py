@@ -13,7 +13,6 @@ class GameStatus(Enum):
     """
     Tic Tac Toe Game can have different statuses, depending on the progress
     """
-    CREATED = 'CREATED'
     IN_PROGRESS = 'IN_PROGRESS'
     TIED = 'TIED'
     PLAYER_1_WINS = 'PLAYER_1_WINS'
