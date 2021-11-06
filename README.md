@@ -231,6 +231,7 @@ docker-compose up -d --build
 docker-compose build
 docker-compose up -d
 ```
+> This would take ~2 mins (can vary based on machine and network).
 6. You can head over to docker app on your machine to confirm that the web and db modules are up and running on your localhost (`http://localhost:8008`).
 7. **AND DONE!** That was easy right? We now have the back end app running in our local machine, so you can start interacting with it now. 
 
