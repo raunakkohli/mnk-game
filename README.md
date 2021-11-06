@@ -121,7 +121,7 @@ These scenarios would be validated and throw exception:
 - Mandatory parameter(s) not passed in request body.
 - Same pawn markers passed for both player_1 and player_2.
 - Starting pawn not respected.
-    > Ex1: passing `a` and `b` but default starting pawn is `x`.
+    > Ex1: passing `a` and `b` but default starting pawn is `x`.  
     > Ex2: passing `x` and `o` but providing override of `starting_pawn` as `m`.
 
 
