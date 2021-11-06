@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn mnk.app:app --host 0.0.0.0'
+    volumes:
+      - .:/mnk
+    ports:
+      - 8008:8000
+    environment:
+      - DATABASE_URL=postgresql://tictactoe_admin:tictactoe_xoxo@db:5432/titactoe_db
+      - CACHE_ENABLED=False
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=tictactoe_admin
+      - POSTGRES_PASSWORD=tictactoe_xoxo
+      - POSTGRES_DB=titactoe_db
+
+volumes:
+  postgres_data:

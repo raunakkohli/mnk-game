@@ -1,0 +1,7 @@
+fastapi==0.70.0
+uvicorn==0.15.0
+cachetools==4.2.4
+asyncpg==0.22.0
+ormar==0.10.5
+psycopg2-binary==2.8.6
+pytest==6.2.5

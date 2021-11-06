@@ -1,0 +1,2649 @@
+{
+	"info": {
+		"_postman_id": "ddfe884c-e9c4-4da1-a735-3a62032ebd95",
+		"name": "tittactoe_scenario_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Positive scenarios",
+			"item": [
+				{
+					"name": "2 PLAYER MODE",
+					"item": [
+						{
+							"name": "Player 1 WIN",
+							"item": [
+								{
+									"name": "Create a new 2P game",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be o\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"o\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 0,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 0,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. make move (P1 WIN)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be PLAYER_1_WINS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"PLAYER_1_WINS\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to show a 2 player game with default starting pawn, in which player_1 wins."
+						},
+						{
+							"name": "Player 2 WIN (with start override)",
+							"item": [
+								{
+									"name": "Create a new 2P game with override for starting pawn",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be {^_^}\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"{^_^}\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"{^_^}\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\",\n    \"starting_pawn\": \"{^_^}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"{^_^}\",\n    \"row\": 0,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be {^_^}\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"{^_^}\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"{^_^}\",\n    \"row\": 0,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be {^_^}\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"{^_^}\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. make move (P2 WIN)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be PLAYER_2_WINS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"PLAYER_2_WINS\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"{^_^}\",\n    \"row\": 0,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to see override functionality of starting pawn, and showcase player_2 winning."
+						},
+						{
+							"name": "Game TIED (draw)",
+							"item": [
+								{
+									"name": "Create a new 2P game",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be o\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"o\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\",\n    \"player_2\": \"o\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 0,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 1,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "6. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 1,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "7. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be o\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"o\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "8. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 2,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "9. make move (TIED)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be TIED\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"TIED\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to show a 2 player game which ends in a draw/tie."
+						}
+					],
+					"description": "This folder contains tests for 2 player mode of tic tac toe game."
+				},
+				{
+					"name": "1 PLAYER MODE",
+					"item": [
+						{
+							"name": "P1 WIN",
+							"item": [
+								{
+									"name": "Create a new 1P game",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be o\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"o\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"SINGLE_PLAYER\",\n    \"player_1\": \"x\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. make move (P1 WIN)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be PLAYER_1_WINS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"PLAYER_1_WINS\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to show a single player game with default starting pawn, in which player_1 wins."
+						},
+						{
+							"name": "P2 WIN (start override)",
+							"item": [
+								{
+									"name": "Create a new 1P game with override for starting pawn",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be {^_^}\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"{^_^}\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"SINGLE_PLAYER\",\n    \"player_1\": \"x\",\n    \"starting_pawn\": \"{^_^}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move (P2 WIN)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be PLAYER_2_WINS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"PLAYER_2_WINS\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to see override functionality of starting pawn, and showcase player_2 winning."
+						},
+						{
+							"name": "Game TIED (draw)",
+							"item": [
+								{
+									"name": "Create a new 1P game",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Has game_id', function() {",
+													"  pm.expect(jsonData).to.have.property('game_id');",
+													"});",
+													"",
+													"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"pm.test(\"player_1 must be x\", function () {",
+													"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+													"});",
+													"",
+													"pm.test(\"player_2 must be o\", function () {",
+													"    pm.expect(jsonData.player_2).to.eql(\"o\");",
+													"});",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"mode\": \"SINGLE_PLAYER\",\n    \"player_1\": \"x\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "1. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "3. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 1\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "4. make move",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"player_turn must be x\", function () {",
+													"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 2,\n    \"column\": 0\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "5. make move (TIED)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = JSON.parse(responseBody);",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Game status must be TIED\", function () {",
+													"    pm.expect(jsonData.game_status).to.eql(\"TIED\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 1,\n    \"column\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host_url}}/tictactoe/move",
+											"host": [
+												"{{host_url}}"
+											],
+											"path": [
+												"tictactoe",
+												"move"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "This folder contains test to show a 1 player game which ends in a draw/tie."
+						}
+					],
+					"description": "This folder contains tests for 1 player mode (vs. computer) of tic tac toe game."
+				}
+			]
+		},
+		{
+			"name": "Negative Scenarios",
+			"item": [
+				{
+					"name": "Invalid game mode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Game mode value must be valid\", function () {",
+									"    pm.expect(jsonData.detail[0].type).to.eql(\"type_error.enum\");",
+									"",
+									"    pm.expect(jsonData.detail[0].msg).to.eql(\"value is not a valid enumeration member; permitted: 'SINGLE_PLAYER', 'TWO_PLAYER'\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mode\": \"DUMMY_MODE\",\n    \"player_1\": \"x\",\n    \"player_2\": \"o\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "missing parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Game mode value must be valid\", function () {",
+									"    pm.expect(jsonData.detail[0].type).to.eql(\"value_error.missing\");",
+									"",
+									"    pm.expect(jsonData.detail[0].msg).to.eql(\"field required\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"player_1\": \"x\",\n    \"player_2\": \"o\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid game config (same pawns)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Player pawns must be unique\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"Player_1 and Player_2 pawn value must be different.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\",\n    \"player_2\": \"x\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid game config (missing starting pawn)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"starting pawn must be respected\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"Starting pawn does not match any provided player pawns.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\",\n    \"player_2\": \"y\",\n    \"starting_pawn\": \"o\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "missing parameter (makeMove)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Pawn must be provided\", function () {",
+									"    pm.expect(jsonData.detail[0].type).to.eql(\"value_error.missing\");",
+									"",
+									"    pm.expect(jsonData.detail[0].msg).to.eql(\"field required\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"row\": 0,\n    \"column\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe/move",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make move on invalid game id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Game id must be valid\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"The game against which operation was attempted does not exist.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"game_id\": \"dummy123\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe/move",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make move on completed game status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Game must be in progress to make move\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"Cannot make a move, since game is over.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// This requires that any positive scenario be run first, so that a game is present in completed state."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 0,\n    \"column\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe/move",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new  game [pre req]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Has game_id', function() {",
+									"  pm.expect(jsonData).to.have.property('game_id');",
+									"});",
+									"",
+									"postman.setEnvironmentVariable(\"game_id\", jsonData.game_id);",
+									"",
+									"",
+									"pm.test(\"Game status must be IN_PROGRESS\", function () {",
+									"    pm.expect(jsonData.game_status).to.eql(\"IN_PROGRESS\");",
+									"});",
+									"",
+									"pm.test(\"player_1 must be x\", function () {",
+									"    pm.expect(jsonData.player_1).to.eql(\"x\");",
+									"});",
+									"",
+									"pm.test(\"player_2 must be o\", function () {",
+									"    pm.expect(jsonData.player_2).to.eql(\"o\");",
+									"});",
+									"",
+									"pm.test(\"player_turn must be x\", function () {",
+									"    pm.expect(jsonData.player_turn).to.eql(\"x\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mode\": \"TWO_PLAYER\",\n    \"player_1\": \"x\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make move out of turn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Move must be made when it is player's turn\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"Move cannot be played out of turn.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// This requires that any positive scenario be run first, so that a game is present in completed state."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"o\",\n    \"row\": 2,\n    \"column\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe/move",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe",
+								"move"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make move on invalid spot",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Move must be made on valid spot\", function () {",
+									"    pm.expect(jsonData.detail).to.eql(\"This move cannot be made. Select a valid and vacant spot.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// This requires that any positive scenario be run first, so that a game is present in completed state."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"game_id\": \"{{game_id}}\",\n    \"pawn\": \"x\",\n    \"row\": 4,\n    \"column\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_url}}/tictactoe/move",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"tictactoe",
+								"move"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is a set of negative scenario tests."
+		}
+	]
+}
